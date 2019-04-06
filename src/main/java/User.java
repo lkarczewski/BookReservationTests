@@ -17,7 +17,7 @@ public class User {
     }
 
     public boolean validateUser(String login, String password) {
-        if(login == null || login.length() == 0 || login.length() > 10 || password == null || password.length() == 0 || password.length() < 4) {
+        if(login == null || login.length() == 0 || login.length() > 20 || password == null || password.length() == 0 || password.length() < 4) {
             return false;
         }
         return true;
