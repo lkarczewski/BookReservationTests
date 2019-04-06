@@ -1,6 +1,8 @@
 # projekt1-lkarczewski
 projekt1-lkarczewski created by GitHub Classroom
 
+run with: mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install -Dmaven.test.failure.ignore=true
+
 Projekt 6 (25 pkt)
 
 Napiszmy program, który będzie realizował prostą wersję systemu rezerwacji (do wyboru: książek, hoteli, restauracji itd.).
