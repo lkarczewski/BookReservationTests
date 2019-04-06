@@ -1,3 +1,4 @@
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -74,5 +75,18 @@ public class UserTest {
     @DisplayName("toString() should return login in string format")
     void userToStringTestAssertJ() {
         assertThat(validUser.toString()).isEqualTo("'lkarczewski'");
+    }
+
+    @AfterAll
+    public static void tearDown() {
+        validUser = null;
+        invalidUser1 = null;
+        invalidUser2 = null;
+        invalidUser3 = null;
+        validLogin = null;
+        invalidLogin2 = null;
+        invalidLogin3 = null;
+        invalidPassword2 = null;
+        invalidPassword3 = null;
     }
 }
