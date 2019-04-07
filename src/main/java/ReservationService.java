@@ -57,4 +57,29 @@ public class ReservationService {
         loadBooks(booksFromFile);
         return errors;
     }
+
+    public boolean addUser(String login, String password) {
+        if(!User.validateUser(login, password))
+            throw new IllegalArgumentException("User data is not valid!");
+        User user = new User(login, password);
+        if(users.contains(user))
+            return false;
+        else {
+            users.add(user);
+            return true;
+        }
+    }
+
+    public User logIn(String login, String password) {
+        return users.stream().filter(user -> user.getLogin().equals(login) && user.getPassword().equals(password)).findFirst().orElse(null);
+    }
+
+    private User getRegisteredUser(User user) {
+        if(user == null || !users.contains(user))
+            return null;
+        User registered = users.get(users.indexOf(user));
+        if(!registered.getPassword().equals(user.getPassword()))
+            return null;
+        return registered;
+    }
 }

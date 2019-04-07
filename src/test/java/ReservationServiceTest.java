@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+
 public class ReservationServiceTest {
 
     static String login, password, name, author, genre, description, bookId;
@@ -54,5 +55,13 @@ public class ReservationServiceTest {
     }
 
     @Test
-    
+    void addUser_invalidData_False() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            String invalidLogin = "asdffdsgjjhsghfahdssgdgs";
+            String invalidPassword = "df";
+            reservationService.addUser(invalidLogin, invalidPassword);
+        });
+    }
+
+
 }
