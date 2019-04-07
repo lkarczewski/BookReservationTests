@@ -28,10 +28,10 @@ public class Book {
         return description;
     }
 
-    public boolean validateBook(String name, String author, String genre, String description) {
-        if(name == null || name == "" || name.length() > 20 || author == null || author == "" || author.length() > 30
+    public static boolean validateBook(String name, String author, String genre, String description) {
+        if(name == null || name == "" || name.length() > 50 || author == null || author == "" || author.length() > 30
         || genre == null || genre == "" || genre.length() > 20 || description == null || description == ""
-        || description.length() > 50) {
+        || description.length() > 100) {
             return false;
         }
         return true;

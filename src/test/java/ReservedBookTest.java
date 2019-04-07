@@ -18,7 +18,6 @@ public class ReservedBookTest {
     static ReservedBook reservedBook;
     static String id, login, password;
     static Date dateOfReservation;
-    static int hour;
     static String dateFormat = "dd.MM.yyyy";
 
     @BeforeAll
@@ -29,8 +28,7 @@ public class ReservedBookTest {
         book = new Book("Drach", "Szczepan Twardoch", "novel", "Some description.");
         id = "0001";
         dateOfReservation = new Date();
-        hour = 13;
-        reservedBook = new ReservedBook(id, user, book, dateOfReservation, hour);
+        reservedBook = new ReservedBook(id, user, book, dateOfReservation);
     }
 
     //hamcrest

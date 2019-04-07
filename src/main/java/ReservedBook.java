@@ -9,15 +9,13 @@ public class ReservedBook {
     private User user;
     private Book book;
     private Date dateOfReservation;
-    private int hour;
     private String dateFormat = "dd.MM.yyyy";
 
-    public ReservedBook(String id, User user, Book book, Date dateOfReservation, int hour) {
+    public ReservedBook(String id, User user, Book book, Date dateOfReservation) {
         this.id = id;
         this.user = user;
         this.book = book;
         this.dateOfReservation = dateOfReservation;
-        this.hour = hour;
     }
 
     public String getId() {
@@ -36,9 +34,6 @@ public class ReservedBook {
         return dateOfReservation;
     }
 
-    public int getHour() {
-        return hour;
-    }
 
     public boolean validateReservation(String id, User user, Book book, Date dateOfReservation) {
         if(id.isEmpty() || user == null || book == null || dateOfReservation == null) {
@@ -52,7 +47,7 @@ public class ReservedBook {
         SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
 
         return "[" + id + "]" + book.getName() + " reserved by: " + user.getLogin() + " at " +
-                sdf.format(dateOfReservation) + " " + hour;
+                sdf.format(dateOfReservation);
     }
 
     public void saveToFile(String path) throws FileNotFoundException {
