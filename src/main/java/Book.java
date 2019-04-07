@@ -27,4 +27,8 @@ public class Book {
     public String getDescription() {
         return description;
     }
+
+    public boolean validateBook(String name, String author, String genre, String description) {
+        return true;
+    }
 }

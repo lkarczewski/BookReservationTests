@@ -34,13 +34,13 @@ public class UserTest {
     //hamcrest
     @Test
     @DisplayName("validateUser() should return true with valid arguments")
-    void userValidationTestTrueHamcrest() {
+    void userValidationTest_TrueHamcrest() {
         assertThat(true, is(validUser.validateUser(validUser.getLogin(), validUser.getPassword())));
     }
 
     @Test
     @DisplayName("validateUser() should return false with invalid arguments")
-    void userValidationTestFalseHamcrest() {
+    void userValidationTest_FalseHamcrest() {
         assertAll("Invalid users tests", () -> {
             assertThat(false, is(invalidUser1.validateUser(invalidUser1.getLogin(), invalidUser1.getPassword())));
             assertThat(false, is(invalidUser2.validateUser(invalidUser2.getLogin(), invalidUser2.getPassword())));
@@ -50,20 +50,20 @@ public class UserTest {
 
     @Test
     @DisplayName("toString() should return login in string format")
-    void userToStringTestHamcrest() {
+    void userToStringTest_Hamcrest() {
         assertThat("'lkarczewski'", is(validUser.toString()));
     }
 
     //assertJ
     @Test
     @DisplayName("validateUser() should return true with valid arguments")
-    void userValidationTestTrueAssertJ() {
+    void userValidationTest_TrueAssertJ() {
         assertThat(validUser.validateUser(validUser.getLogin(), validUser.getPassword())).isTrue();
     }
 
     @Test
     @DisplayName("validateUser() should return false with invalid arguments")
-    void userValidationTestFalseAssertJ() {
+    void userValidationTest_FalseAssertJ() {
         assertAll("Invalid users tests:", () -> {
             assertThat(invalidUser1.validateUser(invalidUser1.getLogin(), invalidUser1.getPassword())).isFalse();
             assertThat(invalidUser2.validateUser(invalidUser2.getLogin(), invalidUser2.getPassword())).isFalse();
@@ -73,7 +73,7 @@ public class UserTest {
 
     @Test
     @DisplayName("toString() should return login in string format")
-    void userToStringTestAssertJ() {
+    void userToStringTest_AssertJ() {
         assertThat(validUser.toString()).isEqualTo("'lkarczewski'");
     }
 
