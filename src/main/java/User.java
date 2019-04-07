@@ -1,11 +1,15 @@
+import java.util.Hashtable;
+
 public class User {
 
     private String login;
     private String password;
+    private Hashtable<String, ReservedBook> reservedBooks;
 
     public User(String login, String password) {
         this.login = login;
         this.password = password;
+        reservedBooks = new Hashtable<String, ReservedBook>();
     }
 
     public String getLogin() {
@@ -14,6 +18,10 @@ public class User {
 
     public String getPassword() {
         return password;
+    }
+
+    public Hashtable<String, ReservedBook> getReservedBooks() {
+        return reservedBooks;
     }
 
     public boolean validateUser(String login, String password) {

@@ -41,6 +41,12 @@ public class ReservedBookTest {
     }
 
     @Test
+    @DisplayName("validateReservation() should return false with wrong parameters")
+    void reservationValidationTest_FalseHamcrest() {
+        assertThat(false, is(reservedBook.validateReservation("",null,null,null)));
+    }
+
+    @Test
     @DisplayName("saveToFile() saves reservation data to file with toString() method")
     void reservationSaveToFileTest_Hamcrest() throws IOException {
 
