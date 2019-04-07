@@ -1,3 +1,6 @@
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class ReservedBook {
@@ -37,7 +40,24 @@ public class ReservedBook {
         return hour;
     }
 
-    public boolean validateReservation(String id, User user, Book book, Date dateOfReservation, int hour) {
+    public boolean validateReservation(String id, User user, Book book, Date dateOfReservation) {
+        if(id.isEmpty() || user == null || book == null || dateOfReservation == null) {
+            return false;
+        }
         return true;
+    }
+
+    @Override
+    public String toString() {
+        SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
+
+        return "[" + id + "]" + book.getName() + " reserved by: " + user.getLogin() + " at " +
+                sdf.format(dateOfReservation) + " " + hour;
+    }
+
+    public void saveToFile(String path) throws FileNotFoundException {
+        PrintWriter pw = new PrintWriter(path + "/reservation" + id + ".txt");
+        pw.println(this.toString());
+        pw.close();
     }
 }
