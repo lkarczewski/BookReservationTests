@@ -29,6 +29,17 @@ public class Book {
     }
 
     public boolean validateBook(String name, String author, String genre, String description) {
+        if(name == null || name == "" || name.length() > 20 || author == null || author == "" || author.length() > 30
+        || genre == null || genre == "" || genre.length() > 20 || description == null || description == ""
+        || description.length() > 50) {
+            return false;
+        }
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "----------\n" + "'" + name + "'\n" + "'" + author + "'\n" + "'" + genre + "'\n" +
+                "'" + description + "'\n" + "----------\n";
     }
 }
