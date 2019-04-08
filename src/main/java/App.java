@@ -26,7 +26,7 @@ public class App {
                 case "1":
                     System.out.print("Enter your nickname: ");
                     login = scanner.next();
-                    System.out.print("Enter your password: "); //Console.readPassword(); -> doesn't work in IDE
+                    System.out.print("Enter your password: "); //Console.readPassword();
                     password = scanner.next();
                     user = rs.logIn(login, password);
                     if(user != null)
@@ -40,13 +40,14 @@ public class App {
                     System.out.print("Enter your nickname: ");
                     login = scanner.next();
                     System.out.print("Enter your password: ");
-                    password = scanner.next(); //Console.readPassword(); -> doesn't work in IDE
+                    password = scanner.next(); //Console.readPassword();
                     try {
-                        if(rs.addUser(login, password))
+                        if(rs.addUser(login, password)) {
                             System.out.println("MESSAGE: Successfuly registered new user '" + login +"'!");
-                        else
-                            System.out.println("MESSAGE: Failed to register new user! Username with that " +
-                                    "nickname already exists!");
+                        }
+                        else {
+                            System.out.println("MESSAGE: Failed to register! Username with that nickname already exists!");
+                        }
                     } catch (Exception e) { System.out.println("ERROR: Something went terribly wrong! " +
                             "Please try again and beware of your input!"); }
                     break;
@@ -69,7 +70,7 @@ public class App {
                         break;
 
                     case "2":
-                        System.out.println("YOUR BOOKED RESTAURANTS:");
+                        System.out.println("YOUR RESERVED BOOKS:");
                         ArrayList<ReservedBook> rb = user.getListOfReservedBooks();
                         if(rb.size() == 0)
                             System.out.println("-");
@@ -112,6 +113,5 @@ public class App {
             }
         }
         scanner.close();
-        System.out.println("Goodbye!");
     }
 }
