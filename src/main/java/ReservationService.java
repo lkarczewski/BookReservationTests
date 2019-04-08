@@ -1,6 +1,9 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 
 public class ReservationService {
@@ -72,6 +75,58 @@ public class ReservationService {
 
     public User logIn(String login, String password) {
         return users.stream().filter(user -> user.getLogin().equals(login) && user.getPassword().equals(password)).findFirst().orElse(null);
+    }
+
+    private User getRegisteredUser(User user) {
+        if(user == null || !users.contains(user))
+            return null;
+        User registered = users.get(users.indexOf(user));
+        if(!registered.getPassword().equals(user.getPassword()))
+            return null;
+        return registered;
+    }
+
+    public boolean reserveBook(User user, int bookId, String date) {
+        user = getRegisteredUser(user);
+        if(user == null)
+            throw new SecurityException("User with that data is not registered!");
+        if(bookId >= books.size())
+            throw new ArrayIndexOutOfBoundsException("Book with ID: " + bookId + " does not exist!");
+        Date realDate = parseDate(date);
+        if(realDate == null)
+            throw new IllegalArgumentException("Date format " + dateFormat + " is required!");
+
+        Book book = books.get(bookId);
+
+        String reservationInfo = getInfo(users.indexOf(user), bookId, date);
+        ReservedBook rb = new ReservedBook();
+
+        if(bookAlreadyReserved(rb))
+            return false;
+        else {
+            user.getReservedBooks().put(reservationInfo, rb);
+            try {
+                rb.saveToFile("src/main/resources/");
+            } catch (FileNotFoundException f) { }
+            }
+            return true;
+        }
+
+    private String getInfo(int userId, int bookId, String date) {
+    }
+
+    private boolean bookAlreadyReserved(ReservedBook rb) {
+    }
+
+    private Date parseDate(String date){
+        SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
+        Date dateObj;
+        try {
+            dateObj = sdf.parse(date);
+        } catch(ParseException e) {
+            dateObj = null;
+        }
+        return dateObj;
     }
 
     public String booksToString() {

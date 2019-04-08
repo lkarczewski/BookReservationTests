@@ -82,13 +82,13 @@ public class App {
                     case "3":
                         System.out.println("BOOKS:\n" + rs.booksToString());
                         try {
-                            System.out.print("Enter book name(check list above): ");
-                            String bookName = scanner.next();
+                            System.out.print("Enter book id(check list above): ");
+                            int bookId = scanner.nextInt();
                             System.out.print("Enter date(dd.MM.yyyy): ");
                             String date = scanner.next();
-                            if(rs.reserveBook(user, bookName, date))
+                            if(rs.reserveBook(user, bookId, date))
                                 System.out.println("MESSAGE: Book succesfully reserved " +
-                                        rs.getBooks().get(id).getName() +
+                                        rs.getBooks().get(bookId).getName() +
                                         " on: " + date);
                             else
                                 System.out.println("MESSAGE: Failed to reserve a book! Please make sure it is available."
