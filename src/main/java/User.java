@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Hashtable;
 
 public class User {
@@ -22,6 +23,10 @@ public class User {
 
     public Hashtable<String, ReservedBook> getReservedBooks() {
         return reservedBooks;
+    }
+
+    public ArrayList<ReservedBook> getListOfReservedBooks() {
+        return new ArrayList<ReservedBook>(reservedBooks.values());
     }
 
     public static boolean validateUser(String login, String password) {

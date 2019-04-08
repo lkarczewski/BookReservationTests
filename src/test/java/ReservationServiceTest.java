@@ -1,3 +1,4 @@
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -6,6 +7,7 @@ import org.junit.jupiter.params.provider.CsvFileSource;
 
 import java.util.ArrayList;
 
+import static junit.framework.Assert.assertNull;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -63,5 +65,18 @@ public class ReservationServiceTest {
         });
     }
 
+    @Test
+    public void logIn_UserWithSameNicknameAndPasswordExistsOnTheList_ProperUser(){
+        reservationService.addUser(login, password);
+        User user = reservationService.logIn(login, password);
+        Assertions.assertThat(user).hasFieldOrPropertyWithValue("login", login)
+                .hasFieldOrPropertyWithValue("password", password);
+    }
 
+    @Test
+    public void logIn_UserExisButPasswordIsNotValid_Null(){
+        reservationService.addUser(login, password);
+        User u = reservationService.logIn(login, password + "different");
+        assertNull(u);
+    }
 }

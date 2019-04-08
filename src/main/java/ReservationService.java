@@ -74,12 +74,11 @@ public class ReservationService {
         return users.stream().filter(user -> user.getLogin().equals(login) && user.getPassword().equals(password)).findFirst().orElse(null);
     }
 
-    private User getRegisteredUser(User user) {
-        if(user == null || !users.contains(user))
-            return null;
-        User registered = users.get(users.indexOf(user));
-        if(!registered.getPassword().equals(user.getPassword()))
-            return null;
-        return registered;
+    public String booksToString() {
+        String tmp = "";
+        for(int i = 0; i < books.size(); i++) {
+            tmp += "[ID: " + i + "] " + books.get(i).toString() + "\n";
+        }
+        return tmp;
     }
 }
