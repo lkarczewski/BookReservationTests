@@ -99,7 +99,7 @@ public class ReservationService {
         Book book = books.get(bookId);
 
         String reservationInfo = getInfo(users.indexOf(user), bookId, date);
-        ReservedBook rb = new ReservedBook();
+        ReservedBook rb = new ReservedBook(reservationInfo, user, book, realDate);
 
         if(bookAlreadyReserved(rb))
             return false;
@@ -112,10 +112,17 @@ public class ReservationService {
             return true;
         }
 
-    private String getInfo(int userId, int bookId, String date) {
+    public String getInfo(int userId, int bookId, String date) {
+        String dateWithoutDots = date.replaceAll("\\.", "");
+        String info = "" + userId + bookId + dateWithoutDots;
+        return info;
     }
 
     private boolean bookAlreadyReserved(ReservedBook rb) {
+        for(User u : users)
+            if(u.getReservedBooks().containsValue(rb))
+                return true;
+        return false;
     }
 
     private Date parseDate(String date){
