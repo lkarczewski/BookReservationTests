@@ -4,6 +4,7 @@ projekt1-lkarczewski created by GitHub Classroom
 
 ```java
 mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install -Dmaven.test.failure.ignore=true
+java -cp target/projekt1-lkarczewski-1.0-SNAPSHOT.jar App
 ```
 
 Projekt 6 (25 pkt)
