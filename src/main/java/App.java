@@ -8,10 +8,10 @@ public class App {
 
         User user = null;
         ReservationService rs = new ReservationService();
-        rs.dbPath = "src/main/db.txt";
+        rs.dbPath = "src/main/resources/db.txt";
 
         int errors = rs.loadBooksFromFile();
-        System.out.println("Database loaded with" + errors + "errors.");
+        System.out.println("Database loaded with " + errors + " errors.");
 
         String option, login, password;
         boolean quit = false;
@@ -24,7 +24,7 @@ public class App {
             login = scanner.next();
             switch(login.toUpperCase()) {
                 case "1":
-                    System.out.print("Enter your nickname: ");
+                    System.out.print("Enter your login: ");
                     login = scanner.next();
                     System.out.print("Enter your password: "); //Console.readPassword();
                     password = scanner.next();
@@ -37,7 +37,7 @@ public class App {
                     break;
 
                 case "2":
-                    System.out.print("Enter your nickname: ");
+                    System.out.print("Enter your login: ");
                     login = scanner.next();
                     System.out.print("Enter your password: ");
                     password = scanner.next(); //Console.readPassword();
