@@ -18,7 +18,6 @@ public class ReservedBookTest {
     static ReservedBook reservedBook;
     static String id, login, password;
     static Date dateOfReservation;
-    static String dateFormat = "dd.MM.yyyy";
 
     @BeforeAll
     public static void setUp() {

@@ -26,7 +26,7 @@ public class App {
                 case "1":
                     System.out.print("Enter your login: ");
                     login = scanner.next();
-                    System.out.print("Enter your password: "); //Console.readPassword();
+                    System.out.print("Enter your password: ");
                     password = scanner.next();
                     user = rs.logIn(login, password);
                     if(user != null)
@@ -40,7 +40,7 @@ public class App {
                     System.out.print("Enter your login: ");
                     login = scanner.next();
                     System.out.print("Enter your password: ");
-                    password = scanner.next(); //Console.readPassword();
+                    password = scanner.next();
                     try {
                         if(rs.addUser(login, password)) {
                             System.out.println("MESSAGE: Successfuly registered new user '" + login +"'!");
@@ -102,7 +102,7 @@ public class App {
                         user = null;
                         break;
 
-                    case "Q":
+                    case "5":
                         quit = true;
                         break;
 

@@ -6,6 +6,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import static junit.framework.Assert.assertNull;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -15,6 +16,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class ReservationServiceTest {
 
     static String login, password, name, author, genre, description, bookId;
+    static Date dateOfReservation;
+    static String dateFormat = "dd.MM.yyyy";
     static User user;
     static Book book;
     static ReservationService reservationService;
@@ -32,6 +35,7 @@ public class ReservationServiceTest {
         description = "One of most famous novels of all time";
         bookId = "0001";
         book = new Book(name, author, genre, description);
+        dateOfReservation = new Date();
 
         reservationService = new ReservationService();
         database = new ArrayList<Book>();
@@ -66,7 +70,7 @@ public class ReservationServiceTest {
     }
 
     @Test
-    public void logIn_UserWithSameNicknameAndPasswordExistsOnTheList_ProperUser(){
+    public void logIn_UserWithSameNicknameAndPasswordExistsOnTheList_ProperUser() {
         reservationService.addUser(login, password);
         User user = reservationService.logIn(login, password);
         Assertions.assertThat(user).hasFieldOrPropertyWithValue("login", login)
@@ -74,7 +78,7 @@ public class ReservationServiceTest {
     }
 
     @Test
-    public void logIn_UserExisButPasswordIsNotValid_Null(){
+    public void logIn_UserExistsButPasswordIsNotValid_Null() {
         reservationService.addUser(login, password);
         User u = reservationService.logIn(login, password + "different");
         assertNull(u);
