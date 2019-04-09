@@ -115,11 +115,21 @@ public class ReservationServiceTest {
     }
 
     @Test
-    public void getInfo_GivenProperData_SetsUpCorrectString(){
+    void getInfo_GivenProperData_SetsUpCorrectString(){
         String date = "02.02.2020".replaceAll("\\.", "");;
         int userId = 2;
         int bookId = 34;
         String information = reservationService.getInfo(userId, bookId, date);
         Assertions.assertThat(information).startsWith(userId + "").endsWith(date).contains("" + bookId);
+    }
+
+    @Test
+    void parseDate_Test_True() {
+        assertThat(reservationService.parseDate("20.01.2019")).isNotNull();
+    }
+
+    @Test
+    void parseDate_Test_False() {
+        assertThat(reservationService.parseDate("asdgdfhghfsgd")).isNull();
     }
 }

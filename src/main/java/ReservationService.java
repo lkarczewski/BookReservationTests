@@ -125,7 +125,7 @@ public class ReservationService {
         return false;
     }
 
-    private Date parseDate(String date){
+    public Date parseDate(String date){
         SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
         Date dateObj;
         try {
