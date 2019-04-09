@@ -9,8 +9,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Date;
 
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertNull;
+import static junit.framework.Assert.*;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -93,5 +92,34 @@ public class ReservationServiceTest {
         int errors = 4;
 
         assertEquals(reservationService.loadBooksFromFile(), errors);
+    }
+
+    @Test
+    void reservedBooksToString_Correct() {
+        ArrayList<Book> books = new ArrayList<Book>();
+        books.add(book);
+        reservationService.loadBooks(books);
+
+        assertThat(reservationService.booksToString()).contains(name).contains(author).
+                contains(genre).contains(description);
+    }
+
+    @Test
+    void reservedBookToString_Wrong() {
+        ArrayList<Book> books = new ArrayList<Book>();
+        books.add(book);
+        reservationService.loadBooks(books);
+        String wrong_string = "'Odyssey'\n'Homer'\n'Ancient'\n'Story about long return.'";
+
+        assertFalse(reservationService.booksToString().contains(wrong_string));
+    }
+
+    @Test
+    public void getInfo_GivenProperData_SetsUpCorrectString(){
+        String date = "02.02.2020".replaceAll("\\.", "");;
+        int userId = 2;
+        int bookId = 34;
+        String information = reservationService.getInfo(userId, bookId, date);
+        Assertions.assertThat(information).startsWith(userId + "").endsWith(date).contains("" + bookId);
     }
 }
