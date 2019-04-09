@@ -5,9 +5,11 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 
+import static junit.framework.Assert.assertFalse;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.CoreMatchers.containsString;
 
 public class BookTest {
 
@@ -72,6 +74,17 @@ public class BookTest {
         invalidBookFromFile = new Book(author, name, genre, description);
         assertThat(invalidBookFromFile.validateBook(invalidBookFromFile.getName(), invalidBookFromFile.getAuthor(),
                 invalidBookFromFile.getGenre(), invalidBookFromFile.getDescription())).isFalse();
+    }
+
+    @Test
+    void bookToStringTest_Correct() {
+        assertThat(validBook.toString(), containsString("'Hamlet'\n'William Shakespeare'\n'Drama'\n'One of Shakespeare's finest.'"));
+    }
+
+    @Test
+    void bookToStringTest_Wrong() {
+        String wrong_string = "'Odyssey'\n'Homer'\n'Ancient'\n'Story about long return.'";
+        assertFalse(validBook.toString().contains(wrong_string));
     }
 
     @AfterAll
