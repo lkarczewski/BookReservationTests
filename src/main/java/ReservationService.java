@@ -118,10 +118,11 @@ public class ReservationService {
         return info;
     }
 
-    private boolean bookAlreadyReserved(ReservedBook rb) {
+    public boolean bookAlreadyReserved(ReservedBook rb) {
         for(User u : users)
-            if(u.getReservedBooks().containsValue(rb))
+            if(u.getReservedBooks().containsValue(rb)) {
                 return true;
+            }
         return false;
     }
 

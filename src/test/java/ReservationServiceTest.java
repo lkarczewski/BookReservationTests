@@ -52,8 +52,32 @@ public class ReservationServiceTest {
         Book b = new Book(name, author, genre, description);
         books.add(b);
         reservationService.loadBooks(books);
-        assertThat(reservationService.getBooks().contains(b));
+        assertTrue(reservationService.getBooks().contains(b));
     }
+
+    @Test
+    void bookRestaurant_SameUserAlreadyReservedThatBook_False() {
+        User user = reservationService.logIn(name, password);
+
+        ReservedBook rb = new ReservedBook("001", user, book, new Date());
+        assertFalse(reservationService.bookAlreadyReserved(rb));
+    }
+
+    @Test
+    public void bookRestaurant_SameUserAlreadyBookedThatRestaurant_NothingChanges() {
+        ArrayList<Book> books = new ArrayList<Book>();
+        books.add(book);
+        reservationService.loadBooks(books);
+        reservationService.addUser(name, password);
+        User user = reservationService.logIn(name, password);
+        String date = "20.02.2019";
+        int bookId = books.size()-1;
+
+        reservationService.reserveBook(user, bookId, date);
+        reservationService.reserveBook(user, bookId, date);
+        assertEquals(user.getReservedBooks().size(), 1);
+    }
+
 
     @Test
     void loadBooks_nullList_throwsNullPointer() {
@@ -82,8 +106,8 @@ public class ReservationServiceTest {
     @Test
     void logIn_UserExistsButPasswordIsNotValid_Null() {
         reservationService.addUser(login, password);
-        User u = reservationService.logIn(login, password + "different");
-        assertNull(u);
+        User user = reservationService.logIn(login, "pass");
+        assertEquals(user, null);
     }
 
     @Test
@@ -132,7 +156,7 @@ public class ReservationServiceTest {
         int bookId = 2;
 
         assertThrows(ArrayIndexOutOfBoundsException.class, () -> {
-            reservationService.reserveBook(user, 2, date);
+            reservationService.reserveBook(user, bookId, date);
         });
     }
 
