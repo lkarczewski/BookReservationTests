@@ -95,6 +95,63 @@ public class ReservationServiceTest {
     }
 
     @Test
+    void reserveBook_CorrectlyReservedBooksWithAllValidData_AddsReservedBooksToUser(){
+        ArrayList<Book> books = new ArrayList<Book>();
+        books.add(book);
+        reservationService.loadBooks(books);
+        reservationService.addUser(name, password);
+        User user = reservationService.logIn(name, password);
+        String date = "20.02.2019";
+        int bookId = books.size()-1;
+
+        reservationService.reserveBook(user, bookId, date);
+        assertEquals(user.getReservedBooks().size(), 1);
+    }
+
+    @Test
+    void reservedBook_SecurityException_UserNotLogged() {
+        ArrayList<Book> books = new ArrayList<Book>();
+        books.add(book);
+        reservationService.loadBooks(books);
+        String date = "20.02.2019";
+        int bookId = books.size()-1;
+
+        assertThrows(SecurityException.class, () -> {
+            reservationService.reserveBook(user, bookId, date);
+        });
+    }
+
+    @Test
+    void reservedBook_ArrayIndexOutOfBoundsException_BookDoesNotExist() {
+        ArrayList<Book> books = new ArrayList<Book>();
+        books.add(book);
+        reservationService.loadBooks(books);
+        reservationService.addUser(name, password);
+        User user = reservationService.logIn(name, password);
+        String date = "20.02.2019";
+        int bookId = 2;
+
+        assertThrows(ArrayIndexOutOfBoundsException.class, () -> {
+            reservationService.reserveBook(user, 2, date);
+        });
+    }
+
+    @Test
+    void reservedBook_IllegalArgumentException_DateIsWrong() {
+        ArrayList<Book> books = new ArrayList<Book>();
+        books.add(book);
+        reservationService.loadBooks(books);
+        reservationService.addUser(name, password);
+        User user = reservationService.logIn(name, password);
+        String date = "02/02/2002";
+        int bookId = books.size()-1;
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            reservationService.reserveBook(user, bookId, date);
+        });
+    }
+
+    @Test
     void reservedBooksToString_Correct() {
         ArrayList<Book> books = new ArrayList<Book>();
         books.add(book);
