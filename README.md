@@ -1,6 +1,6 @@
 # projekt1-lkarczewski
 projekt1-lkarczewski created by GitHub Classroom
-### Travis CI [![Build Status](https://travis-ci.com/testowanieaplikacjijavaug/projekt1-lkarczewski.svg?token=1GLazZGrwXcNFBLzNe2m&branch=master)](https://travis-ci.com/TestowanieRubyUG20182019/projektsemestralny-sudokuteam)
+### Travis CI [![Build Status](https://travis-ci.com/testowanieaplikacjijavaug/projekt1-lkarczewski.svg?token=1GLazZGrwXcNFBLzNe2m&branch=master)](https://travis-ci.com/testowanieaplikacjijavaug/projekt1-lkarczewski)
 
 ```java
 mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install -Dmaven.test.failure.ignore=true
